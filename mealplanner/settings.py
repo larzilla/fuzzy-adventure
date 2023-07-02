@@ -127,5 +127,5 @@ STATIC_URL = '/planner/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-STATICFILES_DIRS = [BASE_DIR/'static',]
+STATICFILES_DIRS = [BASE_DIR/'planner/static',]
 STATIC_ROOT = BASE_DIR/'staticfiles'
