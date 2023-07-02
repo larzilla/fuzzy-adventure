@@ -1,0 +1,24 @@
+{% extends "planner/layout.html" %}
+{% load static %}
+
+{% block title %}
+My Saved Meal Plans
+{% endblock %}
+
+{% block pageTitle %}
+   My Saved Meal Plans
+{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for plan in mealplans %}
+            <li><a href="{% url 'viewplan' plan.id %}">{{ plan.id }} - {{ plan.date|date:"M d, Y" }}</a></li>
+        {% empty %}
+            None yet! <a href="{% url 'planner' %}">Go create one!</a>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'planner/plans.js' %}"></script>
+{% endblock %}

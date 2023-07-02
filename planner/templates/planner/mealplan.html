@@ -1,0 +1,92 @@
+{% extends "planner/layout.html" %}
+{% load static %}
+
+{% block title %}
+Weekly plan
+{% endblock %}
+
+{% block pageTitle %}
+     Plan {{ planname }}
+    
+{% endblock %}
+
+{% block body %}
+<div class="row justify-content-start">
+{% if message %}
+    <div>{{ message }}</div>
+{% else %}
+<div class="col-sm-4 col-md-2"><button data-id="print"><i class="fas fa-print"></i> Print</button></div>
+    <div class="col-sm-4 col-md-1">
+        {% if enableSave %}
+        <form action="{% url 'saveplan' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="hidden" name="breakfast1_recipe"  value="{{ breakfast1.id }}" />
+            <input type="hidden" name="breakfast2_recipe" value="{{ breakfast2.id }}" />
+            <input type="hidden" name="breakfast3_recipe" value="{{ breakfast3.id }}" />
+            <input type="hidden" name="lunch1_recipe" value="{{ lunch1.id }}" />
+            <input type="hidden" name="lunch2_recipe" value="{{ lunch2.id }}" />
+            <input type="hidden" name="dinner1_recipe" value="{{ dinner1.id }}" />
+            <input type="hidden" name="dinner2_recipe" value="{{ dinner2.id }}" />
+        </form>
+        {% endif %}
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table week-meal-plan">
+        <thead>
+            <th></th>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Breakfast</th>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast1.id %}">{{ breakfast1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast2.id %}">{{ breakfast2.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast1.id %}">{{ breakfast1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast2.id %}">{{ breakfast2.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast1.id %}">{{ breakfast1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast3.id %}">{{ breakfast3.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' breakfast3.id %}">{{ breakfast3.name }}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Lunch</th>
+                <td><a class="recipe" href="{% url 'viewrecipe' lunch1.id %}">{{ lunch1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' lunch1.id %}">{{ lunch1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' lunch1.id %}">{{ lunch1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' lunch2.id %}">{{ lunch2.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' lunch2.id %}">{{ lunch2.name }}</a></td>
+                <td><span class="recipe">Left Overs</span></td>
+                <td><span class="recipe">Salad</span></td>
+            </tr>
+            <tr>
+                <th scope="row">Dinner</th>
+                <td><a class="recipe" href="{% url 'viewrecipe' dinner1.id %}">{{ dinner1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' dinner1.id %}">{{ dinner1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' dinner1.id %}">{{ dinner1.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' dinner2.id %}">{{ dinner2.name }}</a></td>
+                <td><a class="recipe" href="{% url 'viewrecipe' dinner2.id %}">{{ dinner2.name }}</a></td>
+                <td><span class="recipe">Pizza Night</span></td>
+                <td><span class="recipe">Eat Out</span></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <h2>Shopping List</h2>
+    <ul class="unstyled-list shopping-list">
+        {% for item in ingredients %}
+        <li><input type="checkbox" class="shopping-list-check">{{ item }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'planner/plans.js' %}"></script>
+{% endblock %}

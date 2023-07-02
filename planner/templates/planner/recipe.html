@@ -1,0 +1,32 @@
+{% extends "planner/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ recipe.name }}
+{% endblock %}
+
+{% block pageTitle %}
+    <span class="recipe-name-text me-3">{{ recipe.name }} </span>
+    {% if user.is_authenticated %}<a href="{% url 'editrecipe' recipe.id %}" class="button--secondary button--small" id="editRecipeButton">Edit</a>{% endif %}
+{% endblock %}
+
+{% block body %}
+    <ul class="meta-categories-list">
+        {% for category in recipe.categories.all %}
+            <li class="meta-category rounded"><a href="{% url 'viewcategory' category.name %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <article id="recipeContainer">
+        <p>Servings: {{ recipe.servings }}<br />
+            Prep Time: {{ recipe.prep_time }} minutes<br />
+            Cook Time: {{ recipe.cook_time }} minutes</p>
+        <h3>Ingredients</h3>
+        <ul id="ingredients">
+            {% for ingredient in ingredients %}
+            <li>{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Instructions</h3>
+        <div id="directions">{{ directions|safe }}</div>
+    </article>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "planner/layout.html" %}
+
+{% block title %}
+Add a new recipe
+{% endblock %}
+
+{% block pageTitle %}Add a New Recipe{% endblock %}
+
+{% block body %}
+<p></p>
+<div class="form-wrap">
+<form action="{% url 'addrecipe' %}" method="post">
+    {% csrf_token %}
+    {% for field in recipeForm %}
+        <div class="form-group {{ field.attribute.name }}">
+            <label class="form-label">{{ field.label }}</label>
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            <div>{{ field }}</div>
+        </div>
+    {% endfor %}
+    <input type="Submit" value="Add Recipe" class="button--primary" />
+</form>
+</div>
+{% endblock %}

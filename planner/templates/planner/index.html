@@ -1,0 +1,26 @@
+{% extends "planner/layout.html" %}
+
+{% block pageTitle %}Recipes {% endblock %}
+
+{% block body %}
+<h2> Search: </h2>
+<form action="{% url 'search' %}" method="POST" class="row g-3">
+    {% csrf_token %}
+    {% for field in RecipeSearchForm %}
+    <div class="col-auto">
+        <label for="search" class="visually-hidden">{{ field.label }}</label>
+        {{ field }}
+      </div>
+      <div class="col-auto">
+        <input type="submit" class="btn btn-primary mb-3" value="Go"/>
+      </div>
+    {% endfor %}
+</form>
+
+<h2>Browse All Recipes:</h2>
+    <ul>
+        {% for recipe in recipes %}
+            <li><a href="{% url 'viewrecipe' recipe.id %}">{{ recipe.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

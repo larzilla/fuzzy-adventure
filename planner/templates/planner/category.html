@@ -1,0 +1,17 @@
+{% extends "planner/layout.html" %}
+
+{% block title %}
+Category - {{ category.name }}
+{% endblock %}
+
+{% block pageTitle %}{{ category.name }} recipes {% endblock %}
+
+{% block body %}
+    <ul>
+        {% for recipe in recipes|dictsort:"name" %}
+            <li><a href="{% url 'viewrecipe' recipe.id %}">{{ recipe.name }}</a></li>
+        {% empty %}
+            None
+        {% endfor %}
+    </ul>
+{% endblock %}

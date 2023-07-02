@@ -1,0 +1,44 @@
+{% extends "planner/layout.html" %}
+
+{% block title %}
+{{ recipe.name }}
+{% endblock %}
+
+{% block body %}
+
+<div id="recipeContainer">
+    <form id="updateRecipe" method="post" action="{% url 'editrecipe' recipe_id %}">
+    {% for field in recipeForm %}
+        <div class="form-group">
+            <label class="form-label">{{ field.label }}</label>
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            <div>{{ field }}</div>
+        </div>
+    {% endfor %}
+        <div class="mb-3">
+            <a class="btn btn-outline-secondary" href="{% url 'viewrecipe' recipe_id %}">Cancel</a>
+            <input type="submit" class="btn btn-primary" value="Update" />
+        </div>
+    </form>
+    <!-- 
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="page-title" name="recipename" value="{{ recipe.name }}" />
+        </div>
+        <ul class="meta-categories-list">
+            {% for category in recipe.categories.all %}
+                <li class="meta-category rounded"><a href="{% url 'viewcategory' category.name %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="mb-3">
+        <label class="form-label">Ingredients</label>
+        <textarea id="updatedIngredients" name="ingredients" rows="3">{{ recipe.ingredients }}</textarea>
+        </div>
+        <div class="mb-3">
+        <label class="form-label">Instructions</label>
+        <textarea rows="5" name="directions">{{ recipe.directions }}</textarea>
+        </div>
+        
+         -->
+</div>
+{% endblock %}
