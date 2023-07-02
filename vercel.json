@@ -16,8 +16,8 @@
     ],
     "routes": [
       {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
+        "src": "planner/static/(.*)",
+        "dest": "planner/static/$1"
       },
       {
         "src": "/(.*)",
